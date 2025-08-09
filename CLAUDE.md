@@ -61,8 +61,14 @@ When Agent OS is installed in a project, it creates:
     └── decisions.md        # Decision log with override priority
 ```
 
-## Installation Commands
+## Development Commands
 
+### Installation Scripts
+- `./setup.sh` - Install Agent OS base files to `~/.agent-os/`
+- `./setup-claude-code.sh` - Install Claude Code commands to `~/.claude/`  
+- `./setup-cursor.sh` - Install Cursor rules to `.cursor/rules/`
+
+### Claude Code Slash Commands
 For new projects:
 ```bash
 /plan-product
@@ -79,9 +85,27 @@ Then use:
 /execute-tasks  # Implement features
 ```
 
+## Workflow Patterns
+
+### Instruction File Structure
+Instructions follow a structured format with:
+- YAML frontmatter with metadata
+- `<process_flow>` sections with numbered steps
+- `<step>` blocks that delegate to specific subagents
+- Template structures for file generation
+- Validation and error handling patterns
+
+### Template System
+Agent OS uses a sophisticated templating system:
+- File templates with `<file_template>` blocks
+- Section templates with variable placeholders (`[VARIABLE_NAME]`)
+- Conditional content based on user input
+- Schema validation for generated content
+
 ## Important Notes
 
 - Agent OS uses a structured template system for consistent file generation
 - The `decisions.md` file has override priority over other configurations
 - Subagents are designed to be proactive and specialized for specific tasks
 - All workflows emphasize validation and error handling before proceeding
+- Instructions reference external files using `@~/.agent-os/` paths for modularity
